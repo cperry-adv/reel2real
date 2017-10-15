@@ -148,16 +148,16 @@ function initPlayers(num) {
 
           // // pause other players
           // for(var j = 0; j < num; j++) {
-          //  allPlayers = document.getElementById('player' + j);
-          //  allPlayBtns = document.getElementById('playObj' + j);
+          //  allPlayers = document.getElementById("player" + j);
+          //  allPlayBtns = document.getElementById("playObj" + j);
 
           //  if(allPlayers != player) {
           //    allPlayers.pause();
           //  }
 
           //  if(allPlayBtns != playBtn) {
-          //    if(jQuery(allPlayBtns).hasClass('playing')) {
-          //      jQuery(allPlayBtns).removeClass('playing')
+          //    if(jQuery(allPlayBtns).hasClass("playing")) {
+          //      jQuery(allPlayBtns).removeClass("playing")
           //    }
           //  }
           // }
