@@ -58,7 +58,7 @@ function fancy_audio_player_output($nid) {
 
     function drawStuff() {
             // do your drawing stuff here
-      window.addEventListener('load', eventWindowLoaded, false);
+      window.addEventListener("load", eventWindowLoaded, false);
 function eventWindowLoaded() {
    var audioElement = document.getElementById("theAudio");
    audioElement.addEventListener("canplaythrough",audioLoaded,false);
