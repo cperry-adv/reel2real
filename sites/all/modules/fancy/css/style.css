@@ -10,10 +10,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
 height: 100% !important;
 }
 
-
+.seekObjContainer, .smalltext {
+  position: relative;
+  left: 4%;
+}
 
 .audio-player {
-  border: 1px solid #333;
   text-align: center;
   display: flex;
   flex-flow: row;
