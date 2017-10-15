@@ -112,7 +112,7 @@ function initProgressBar() {
 
 
     if (player.currentTime == player.duration) {
-      $("#play-btn").removeClass("fa-pause");
+      $("#play-btn").removeClass("fa-play-circle");
     }
 
     function seek(evt) {
