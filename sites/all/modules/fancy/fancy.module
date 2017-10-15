@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * Implements hook_user_view_alter().
+ */
+function fancy_user_view_alter(&$build) {
+  unset($build['summary']);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function fancy_menu() {
+  $items['tracks/%node/share'] = array(
+    'title arguments' => array(1),
+    'title callback' => 'fancy_get_title',
+    'page callback' => 'fancy_page',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+  );
+
+  return $items;
+}
+
+function fancy_menu_alter(&$items) {
+  $items['node/15']['access callback'] = TRUE;
+  $items['node/15']['page callback'] = 'fancy_audio_player_output';
+  $items['node/15']['page arguments'] = array(1);
+}
+
+/**
+ * Page callback for Track pages.
+ */
+function fancy_audio_player_output($nid) {
+  $node = node_load($nid);
+  $audio_uri = file_create_url($node->field_audio_file['und'][0]['uri']);
+  $canvas_markup = '<canvas id="audioPlayer"><audio id="theAudio" controls><source src="' . $audio_uri  . '" type="audio/wav"></audio></canvas>';
+  $js = '<script type="text/javascript">
+(function() {
+    var canvas = document.getElementById("audioPlayer"),
+            context = canvas.getContext("2d");
+
+    // resize the canvas to fill browser window dynamically
+    window.addEventListener("resize", resizeCanvas, false);
+
+    function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            /**
+             * Your drawings need to be inside this function otherwise they will be reset when 
+             * you resize the browser window and the canvas goes will be cleared.
+             */
+            drawStuff(); 
+    }
+    resizeCanvas();
+
+    function drawStuff() {
+            // do your drawing stuff here
+    }
+})();
+</script>';
+  $css = '<style type="text/css">
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+
+html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+
+canvas { display:block;background:blue; } /* To remove the scrollbars */
+</style>';
+
+  print $css . $canvas_markup . $js;
+die;
+}
+
+/**
+ * Page callback for Share page.
+ */
+function fancy_page($node) {
+  $form = drupal_get_form('fancy_form');
+  return drupal_render($form);
+}
+
+/**
+ * Title callback for Share page.
+ */
+function fancy_get_title($node) {
+  return 'Share ' . $node->title;
+}
+
+/**
+ * Implements hook_form().
+ */
+function fancy_form($form, &$form_state) {
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => '',
+    '#size' => '20',
+    '#attributes' =>array('placeholder' => t('E-mail address'))
+  );
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Share'),
+  );
+  
+  $form['track_nid'] = array(
+    '#type' => 'value',
+    '#value' => arg(1)
+  );
+  
+  return $form;
+}
+
+function fancy_form_validate($form, &$form_state) {
+  $valid_email = $form_state['values']['email'];
+  if (!valid_email_address($valid_email)) {
+  form_set_error('email', 'Sorry. Your email address,' . $valid_email . ', is not valid. Please submit a valid E-mail address.');
+  }
+}
+
+function fancy_form_submit($form, &$form_state) {
+  $valid_email = $form_state['values']['email'];
+    $from = 'chris@fancywizard.com';
+    $track_nid = $form_state['values']['track_nid'];
+    $alias = drupal_get_path_alias('node/' . $track_nid);
+    $body = l('Click to view track', $alias, array('absolute' => TRUE));
+    $to = $valid_email; // Set this email address - emails will be sent to this email address! 
+    $params = array(
+    'body' => $body,
+    'subject' => 'A track was shared with you on REEL2REEL!!',
+    );
+ 
+    if (drupal_mail('fancy', 'some_mail_key', $to, language_default(), $params, $from, TRUE))
+    {
+        drupal_set_message('Thanks, we will be in contact with more information soon.');     
+    } else {
+        drupal_set_message('There was an error subscribing you. Please try again later');
+    }
+}
+
+function fancy_mail($key, &$message, $params) {
+  switch ($key) {
+//switching on $key lets you create variations of the email based on the $key parameter
+    case 'some_mail_key':
+      $message['subject'] = $params['subject'];
+//the email body is here, inside the $message array
+      $message['body'][] = $params['body'];
+      break;
+  }
+}

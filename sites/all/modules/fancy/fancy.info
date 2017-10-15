@@ -1,0 +1,9 @@
+name = Fancy
+description = custom shit.
+package = Fancy
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2014-05-01
+version = "7.x-1.0"
+core = "7.x"
+

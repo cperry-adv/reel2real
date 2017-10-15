@@ -1,0 +1,407 @@
+diff --git a/soundmanager2-bar-ui-player.tpl.php b/soundmanager2-bar-ui-player.tpl.php
+new file mode 100644
+index 0000000..b1b17db
+--- /dev/null
++++ b/soundmanager2-bar-ui-player.tpl.php
+@@ -0,0 +1,122 @@
++<?php
++/**
++ * @file
++ * Bar-UI player template
++ */
++?>
++
++<div class="sm2-bar-ui">
++
++ <div class="bd sm2-main-controls">
++
++  <div class="sm2-inline-texture"></div>
++  <div class="sm2-inline-gradient"></div>
++
++  <div class="sm2-inline-element sm2-button-element">
++   <div class="sm2-button-bd">
++    <a href="#play" class="sm2-inline-button play-pause">Play / pause</a>
++   </div>
++  </div>
++
++  <div class="sm2-inline-element sm2-inline-status">
++
++   <div class="sm2-playlist">
++    <div class="sm2-playlist-target">
++     <!-- playlist <ul> + <li> markup will be injected here -->
++     <!-- if you want default / non-JS content, you can put that here. -->
++     <noscript><p>JavaScript is required.</p></noscript>
++    </div>
++   </div>
++
++   <div class="sm2-progress">
++    <div class="sm2-row">
++    <div class="sm2-inline-time">0:00</div>
++     <div class="sm2-progress-bd">
++      <div class="sm2-progress-track">
++       <div class="sm2-progress-bar"></div>
++       <div class="sm2-progress-ball"><div class="icon-overlay"></div></div>
++      </div>
++     </div>
++     <div class="sm2-inline-duration">0:00</div>
++    </div>
++   </div>
++
++  </div>
++
++  <div class="sm2-inline-element sm2-button-element sm2-volume">
++   <div class="sm2-button-bd">
++    <span class="sm2-inline-button sm2-volume-control volume-shade"></span>
++    <a href="#volume" class="sm2-inline-button sm2-volume-control">volume</a>
++   </div>
++  </div>
++
++  <div class="sm2-inline-element sm2-button-element sm2-menu">
++   <div class="sm2-button-bd">
++    <a href="#menu" class="sm2-inline-button menu">menu</a>
++   </div>
++  </div>
++
++ </div>
++
++ <div class="bd sm2-playlist-drawer sm2-element">
++
++  <div class="sm2-inline-texture">
++   <div class="sm2-box-shadow"></div>
++  </div>
++
++  <!-- playlist content is mirrored here -->
++
++  <div class="sm2-playlist-wrapper">
++    
++    <ul class="sm2-playlist-bd">
++
++     <!-- example: playable link, "buy" link, "download" link -->
++    <?php foreach ($tracks as $delta => $track): ?> 	
++     <li>
++      <div class="sm2-row">
++       <div class="sm2-col sm2-wide">
++        <?php print $track; ?>
++       </div>
++      </div>
++     </li>
++      <?php endforeach; ?>
++    
++    </ul>
++  
++  </div>
++
++  <div class="sm2-extra-controls">
++
++   <div class="bd">
++
++    <div class="sm2-inline-element sm2-button-element">
++     <a href="#prev" title="Previous" class="sm2-inline-button previous">&lt; previous</a>
++    </div>
++
++    <div class="sm2-inline-element sm2-button-element">
++     <a href="#next" title="Next" class="sm2-inline-button next">&gt; next</a>
++    </div>
++
++    <!-- not implemented -->
++    <!--
++    <div class="sm2-inline-element sm2-button-element disabled">
++     <div class="sm2-button-bd">
++      <a href="#repeat" title="Repeat playlist" class="sm2-inline-button repeat">&infin; repeat</a>
++     </div>
++    </div>
++    -->
++
++    <!-- not implemented -->
++    <!--
++    <div class="sm2-inline-element sm2-button-element disabled">
++     <a href="#shuffle" title="Shuffle" class="sm2-inline-button shuffle">shuffle</a>
++    </div>
++    -->
++
++   </div>
++
++  </div>
++
++ </div>
++
++</div>
+\ No newline at end of file
+diff --git a/soundmanager2.module b/soundmanager2.module
+index 302408a..42e010f 100644
+--- a/soundmanager2.module
++++ b/soundmanager2.module
+@@ -49,6 +49,18 @@ function soundmanager2_library() {
+         ),
+       ),
+     ),
++    //SoundManager 2 bar-iu player
++    'soundmanager2_bar_ui_player' => array(
++      'title' => t('SoundManager 2 Bar-UI Player'),
++      'website' => 'http://www.schillmania.com/projects/soundmanager2/doc/download/',
++      'version' => '2.97',
++      'js' => array(
++        $sm2_library_path . '/demo/bar-ui/script/bar-ui.js' => array(),
++    ),
++      'css' => array(
++        $sm2_library_path . '/demo/bar-ui/css/bar-ui.css' => array(),
++      ),
++    ),
+     // SoundManager 2 Page Player
+     'soundmanager2_page_player' => array(
+       'title' => t('SoundManager 2 Page Player'),
+@@ -108,7 +120,14 @@ function soundmanager2_permission() {
+  * Implmentation of hook_theme().
+  */
+ function soundmanager2_theme() {
+-  return array(
++	return array(
++    'soundmanager2_bar_ui_player' => array(
++      'variables' => array('tracks' => array()),
++      'template' => 'soundmanager2-bar-ui-player',
++    ),
++    'soundmanager2_bar_ui_player_pause' => array(
++      'variables' => array(),
++    ),
+     'soundmanager2_page_player' => array(
+       'variables' => array('tracks' => array()),
+       'template' => 'soundmanager2-page-player',
+@@ -130,7 +149,7 @@ function soundmanager2_theme() {
+     'soundmanager2_inline_player_pause' => array(
+       'variables' => array(),
+     ),
+-        'soundmanager2_config' => array(
++     'soundmanager2_config' => array(
+       'variables' => array(),
+     ),
+     'soundmanager2_config_ui360' => array(
+@@ -243,6 +262,16 @@ function soundmanager2_admin_validate($form, &$form_state) {
+  */
+ function soundmanager2_field_formatter_info() {
+   return array(
++  	'soundmanager2_bar_ui_player' => array(
++      'label' => t('SoundManager 2 Bar-UI Player'),
++      'field types' => array('file', 'media', 'link_field'),
++      'settings' => array(
++        'stream' => FALSE,
++        'audio_type' => 'default',
++        'pause' => 'pause',        
++        'text' => 'filename',
++      ),
++    ),
+     'soundmanager2_page_player' => array(
+       'label' => t('SoundManager 2 Page Player'),
+       'field types' => array('file', 'media', 'link_field'),
+@@ -293,6 +322,35 @@ function soundmanager2_field_formatter_settings_form($field, $instance, $view_mo
+   $element = array();
+ 
+   switch ($display['type']) {
++    //SoundManager Bar-UI Player
++    case 'soundmanager2_bar_ui_player':
++      if ($field['type'] == 'link_field') {
++        $element['stream'] = array(
++          '#title' => t('Streaming audio'), 
++          '#type' => 'checkbox',
++          '#default_value' => $settings['stream'],
++        );
++       $element['audio_type'] = array(
++          '#title' => t('Audio type'), 
++          '#type' => 'select',
++         '#options' => _audio_type_options(),
++          '#default_value' => $settings['type'],
++        );
++      }
++      $element['pause'] = array(
++        '#title' => t('Pause Action'),
++        '#type' => 'select',
++        '#options' => _pause_options(),
++        '#default_value' => $settings['pause'],
++      );
++      $element['text'] = array(
++        '#title' => t('Link text'),
++        '#type' => 'select',
++        '#options' => _link_text_options(),
++        '#default_value' => $settings['text'],
++      );
++      break;
++
+     // SoundManager 2 Page Player
+     case 'soundmanager2_page_player':
+       if ($field['type'] == 'link_field') {
+@@ -429,6 +487,16 @@ function soundmanager2_field_formatter_settings_summary($field, $instance, $view
+   $pause = _pause_options();
+   
+   switch ($display['type']) {
++    //SoundManager 2 Bar-UI Player
++    case 'soundmanager2_bar_ui_player':
++     if ($field['type'] == 'link_field') { 
++        $summary[] = $settings['stream'] ? t('Streaming: YES') : t('Streaming: NO');
++        $summary[] = $settings['audio_type'] == 'default' ? t('Audio type: default') : t('Audio type: ') . $settings['audio_type'];
++      }
++      $summary[] = t('Pause action: @pause', array('@pause' => $pause[$settings['pause']]));
++      $summary[] = t('Link text: @text', array('@text' => $options[$settings['text']]));
++      break;
++      
+     // SoundManager 2 Page Player
+     case 'soundmanager2_page_player':
+       if ($field['type'] == 'link_field') { 
+@@ -473,9 +541,10 @@ function soundmanager2_field_formatter_settings_summary($field, $instance, $view
+  * Implements hook_field_formatter_view().
+  */
+ function soundmanager2_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
++
+   $element = array();
+   $settings = $display['settings'];
+-
++	
+   $tracks = array();
+   foreach ($items as $delta => $item) {
+     // Prepend a random parameter to the URL in case this track appears
+@@ -532,6 +601,28 @@ function soundmanager2_field_formatter_view($entity_type, $entity, $field, $inst
+       $tracks[$delta] = l($text, file_create_url($item['uri']), $url_options);
+     }
+     switch ($display['type']) {
++      case 'soundmanager2_bar_ui_player':
++        $element[0] = array(
++          '#theme' => 'soundmanager2_bar_ui_player',
++          '#tracks' => $tracks,
++          '#attached' => array(
++            'library' => array(
++              array('soundmanager2', variable_get('sm2_debug_mode', FALSE) ? 'soundmanager2_debug' : 'soundmanager2'),
++              array('soundmanager2', 'soundmanager2_bar_ui_player'),
++            ),
++          ),
++        );
++
++       drupal_add_js(array('soundmanager2' => array(
++           'stream' => $settings['stream'],
++        )), 'setting');
++               
++        // Add in the config files
++        theme('soundmanager2_config');
++        if ($settings['pause'] == 'stop') {
++          theme('soundmanager2_bar_ui_player_pause');
++        }
++        break;
+       case 'soundmanager2_page_player':
+         $element[0] = array(
+           '#theme' => 'soundmanager2_page_player',
+@@ -641,10 +732,108 @@ function theme_soundmanager2_config_ui360_pause() {
+ } 
+   
+ /**
++ * Theme function for overriding the Bar-UI player configuration for pause/stop.
++ */
++function theme_soundmanager2_bar_ui_player_pause() {
++
++  drupal_add_css('.sm2-bar-ui .sm2-inline-gradient { 
++  					/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feccb1+0,f17432+50,ea5507+51,fb955e+100;Red+Gloss+%232 */
++					background: #feccb1; /* Old browsers */
++					background: -moz-linear-gradient(top,  #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%); /* FF3.6+ */
++					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feccb1), color-stop(50%,#f17432), color-stop(51%,#ea5507), color-stop(100%,#fb955e)); /* Chrome,Safari4+ */
++					background: -webkit-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Chrome10+,Safari5.1+ */
++					background: -o-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Opera 11.10+ */
++					background: -ms-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* IE10+ */
++					background: linear-gradient(to bottom,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* W3C */
++					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#feccb1", endColorstr="#fb955e",GradientType=0 ); /* IE6-9 */
++
++ 		}', array('type' => 'inline', 'scope' => 'header'));         
++ 		
++  $data = "baruiPlayer.css = {sDefault: 'sm2_link', sLoading: 'sm2_loading', sPlaying: 'sm2_playing', sPaused: 'sm2_link'}; ";
++  $data .= "baruiPlayer.events.stop = function() { baruiPlayer.removeClass(this._data.oLink,this._data.className); this._data.className = ''; baruiPlayer.stopSound(this);}; ";
++  $data .= "baruiPlayer.events.pause = function() { baruiPlayer.removeClass(this._data.oLink,this._data.className); this._data.className = ''; baruiPlayer.stopSound(this);}; ";
++  $data .= "baruiPlayer.events.resume = function() { baruiPlayer.removeClass(this._data.oLink,this._data.className); this._data.className = baruiPlayer.css.sPlaying; baruiPlayer.addClass(this._data.oLink,this._data.className);}; ";
++
++    drupal_add_js($data, array('type' => 'inline', 'scope' => 'footer'));
++} 
++
++
++/**
+  * Theme function for overriding the Inline player configuration for pause/stop.
+  */
+ function theme_soundmanager2_inline_player_pause() {
+-  drupal_add_css('ul.graphic li a.sm2_playing, ul.graphic li a.sm2_playing:hover { background:#003366 url(/'.drupal_get_path('module', 'soundmanager2') . '/images/icon_stop.png) no-repeat 3px 50%; _background-image:url(/'.drupal_get_path('module', 'soundmanager2') . '/images/icon_stop.gif); }', array('type' => 'inline', 'scope' => 'header'));         
++
++  drupal_add_css('
++  ul.graphic {
++		list-style-type: none;
++	}
++
++  a, a.active {
++		color: #f2720f;
++		text-decoration: none;
++		}
++		
++  ul.graphic {	margin-top: 8px;
++				margin-bottom: 8px;
++				}
++					
++	ul.graphic li {	position: relative;
++				  	background-position: left;
++					right: -28px;
++				}
++					
++	ul.graphic li a, ul.graphic li a.sm2_link {
++		color: #f2720f; 
++		padding-top: 10px;
++		padding-bottom: 10px;
++		background-repeat: no-repeat;
++		content: " ";
++		display: inline;
++    	font-family: "PT Sans",Helvetica,Arial,sans-serif;
++    	font-size: 14px;
++		font-weight: 100;
++		min-height: 16px;
++		padding-left: 42px;
++		cursor: pointer;
++   		display: inline;
++		}
++		
++	ul.graphic li a.sm2_link {
++		transition: width 2s, height 4s;
++		}
++
++
++  	ul.graphic li a, ul.graphic li a.sm2_paused:hover, ul.graphic li a.sm2_link:hover
++		{ 
++		background:transparent url(/'.drupal_get_path('module', 'soundmanager2') . '/images/ltv_play.png); 
++		_background-image:url(/'.drupal_get_path('module', 'soundmanager2') . '/images/ltv_play.gif); }
++		
++	ul.graphic li a.sm2_paused, ul.graphic li a.sm2_paused:hover,
++	ul.graphic li a.sm2_playing, ul.graphic li a.sm2_playing:hover
++		{ 
++		background:transparent url(/'.drupal_get_path('module', 'soundmanager2') . '/images/ltv_pause.png); 
++		_background-image:url(/'.drupal_get_path('module', 'soundmanager2') . '/images/ltv_pause.gif); }
++  	
++  	ul.graphic li a.sm2_paused, ul.graphic li a.sm2_paused:hover {
++    	background: transparent url("/sites/all/modules/soundmanager2/images/ltv_play.png") no-repeat scroll 0 0;
++    	background-position: 0px 50%;
++	}
++	
++	ul.graphic li a, ul.graphic li a.sm2_paused:hover, ul.graphic li a.sm2_link:hover,
++	ul.graphic li a.sm2_playing, ul.graphic li a.sm2_playing:hover  {
++		color: #f2720f; 
++		background-position: 1px 50%;
++		background-repeat: no-repeat;
++		}
++		
++	ul.graphic li a.sm2_playing:hover {
++		background-position: 0px 50%;
++		}
++		
++	', //End of CSS override declarations
++  	array('type' => 'inline', 'scope' => 'header')
++  	);         // End add css
++  //../../../../../modules/mnmedia/assets/buttons.png
+   $data = "inlinePlayer.css = {sDefault: 'sm2_link', sLoading: 'sm2_loading', sPlaying: 'sm2_playing', sPaused: 'sm2_link'}; ";
+   $data .= "inlinePlayer.events.stop = function() { inlinePlayer.removeClass(this._data.oLink,this._data.className); this._data.className = ''; inlinePlayer.stopSound(this);}; ";
+   $data .= "inlinePlayer.events.pause = function() { inlinePlayer.removeClass(this._data.oLink,this._data.className); this._data.className = ''; inlinePlayer.stopSound(this);}; ";
+@@ -654,7 +843,7 @@ function theme_soundmanager2_inline_player_pause() {
+ } 
+ 
+ /**
+- * Theme function for overriding the Page player configuration for pause/stop.
++ * Theme function for overriding the Page Player configuration for pause/stop.
+  */
+ function theme_soundmanager2_page_player_pause() {
+   $data = "pagePlayer.css = {sDefault: 'sm2_link', sLoading: 'sm2_loading', sPlaying: 'sm2_playing', sPaused: 'sm2_link'}; ";
