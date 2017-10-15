@@ -62,12 +62,15 @@ function fancy_audio_player_output($nid) {
           </div>
           <div class="player-controls scrubber">
             <p>Oslo <small>by</small> Holy Esque</p>
+            <div class="smalltext">
+            <small style="float: left; position: relative; left: 15px;" id="start-time">01:25</small>
+            <small style="float: right; position: relative; right: 20px;" id="end-time">5:44</small>
+            </div>
             <span id="seekObjContainer">
               <progress id="seekObj" value="0.246498" max="1"></progress>
             </span>
-            <br>
-            <small style="float: left; position: relative; left: 15px;" id="start-time">01:25</small>
-            <small style="float: right; position: relative; right: 20px;" id="end-time">5:44</small>
+            
+            
 
             </div>
             <div class="album-image" style="background-image: url(https://artistxite.ie/imgcache/album/005/161/005161476_500.jpg)"></div>
