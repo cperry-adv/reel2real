@@ -122,7 +122,7 @@ function canvasApp() {
 
    function gameLoop() {
               window.setTimeout(gameLoop, 20);
-              drawScreen()
+              drawScreen();
          }
 
    gameLoop();
