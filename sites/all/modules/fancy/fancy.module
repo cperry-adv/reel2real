@@ -34,6 +34,7 @@ function fancy_menu_alter(&$items) {
 function fancy_audio_player_output($nid) {
   $node = node_load($nid);
   $audio_uri = file_create_url($node->field_audio_file['und'][0]['uri']);
+  $cover_image = file_create_url($node->field_cover_art['und'][0]['uri']);
   $markup = '<!DOCTYPE html>
 <head>
 <title>Marabunta</title>
@@ -54,6 +55,7 @@ function fancy_audio_player_output($nid) {
   <div class="audio-player">
           <div id="play-btn" class=""></div>
           <div class="audio-wrapper" id="player-container" href="javascript:;">
+            <div class="cover-image" style="background-image: url("' . $conver_image . '");"></div>
             <audio id="player" ontimeupdate="initProgressBar()">
               <source src="' . $audio_uri . '" type="audio/wav">
             </audio>
