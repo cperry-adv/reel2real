@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
 
 
 
-	play.live('click', function(e) {
+	play.on('click', function(e) {
 		e.preventDefault();
 		song.play();
 
@@ -25,21 +25,21 @@ jQuery(document).ready(function() {
 		$('#seek').attr('max',song.duration);
 	});
 
-	pause.live('click', function(e) {
+	pause.on('click', function(e) {
 		e.preventDefault();
 		song.pause();
 		$(this).replaceWith('<a class="button gradient" id="play" href="" title=""></a>');
 
 	});
 
-	mute.live('click', function(e) {
+	mute.on('click', function(e) {
 		e.preventDefault();
 		song.volume = 0;
 		$(this).replaceWith('<a class="button gradient" id="muted" href="" title=""></a>');
 
 	});
 
-	muted.live('click', function(e) {
+	muted.on('click', function(e) {
 		e.preventDefault();
 		song.volume = 1;
 		$(this).replaceWith('<a class="button gradient" id="mute" href="" title=""></a>');
