@@ -65,8 +65,8 @@ function fancy_audio_player_output($nid) {
           <div class="player-controls scrubber">
             <p class="tracktitle">' . $node->field_audio_file['und'][0]['filename'] .'</p>
             <div class="smalltext">
-            <small style="float: left; position: relative; left: 15px;" id="start-time">01:25</small>
-            <small style="float: right; position: relative; right: 20px;" id="end-time">5:44</small>
+            <small style="font-size: 2rem; float: left; position: relative; left: 15px;" id="start-time">01:25</small>
+            <small style="font-size: 2rem; float: right; position: relative; right: 20px;" id="end-time">5:44</small>
             </div>
             <span id="seekObjContainer">
               <progress id="seekObj" value="0.246498" max="1"></progress>

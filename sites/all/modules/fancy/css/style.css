@@ -17,6 +17,7 @@ height: 100% !important;
 
 .tracktitle {
   margin-bottom: 25px;
+  font-size: 4rem;
 }
 
 .audio-player {
@@ -66,5 +67,6 @@ height: 100% !important;
   cursor: pointer;
   margin: 2rem auto;
   font-size: 7rem;
+  margin-top: 15px;
 }
 
