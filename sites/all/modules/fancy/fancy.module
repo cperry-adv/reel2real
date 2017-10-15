@@ -51,7 +51,7 @@ function fancy_audio_player_output($nid) {
 </head>
 
 <body>
-  <div class="cover-image" style="margin: 10% auto; display: flex; width: 50%; height: 50%; background-image: url(' . $cover_image . ');"></div>
+  <div class="cover-image" style="margin: 10% auto; display: flex; width: 85%; height: 50%; background-image: url(' . $cover_image . ');"></div>
   <div class="audio-player">
           <div id="play-btn" class=""></div>
           <div class="audio-wrapper" id="player-container" href="javascript:;">
