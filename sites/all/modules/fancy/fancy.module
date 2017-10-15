@@ -72,7 +72,7 @@ function eventWindowLoaded() {
 
    buttonSheet = new Image();
    buttonSheet.onload = itemLoaded;
-   buttonSheet.src = "audiocontrols.png";
+   buttonSheet.src = "http://reel-2-real.com/sites/all/modules/fancy/audiocontrols.png";
 
 }
 
