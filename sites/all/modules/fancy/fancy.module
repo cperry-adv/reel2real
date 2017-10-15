@@ -148,7 +148,7 @@ function initPlayers(num) {
           player.pause();
           // playObj.textContent = "Play";
           isPlaying = false;
-          $("#play-btn").removeClass("fa-pause");
+          $("#play-btn").removeClass("fa-pause").addClass("fa-play-circle");
 
         } else {
           player.play();
