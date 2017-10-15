@@ -56,12 +56,9 @@ height: 100% !important;
   font-size: 1.6rem;
 }
 .audio-player #play-btn {
-  background-image: url('http://imgur.com/JzQP8td.png');
-  background-size: cover;
-  width: 75px;
-  height: 75px;
+
+  cursor: pointer;
   margin: 2rem auto;
+  font-size: 10rem;
 }
-.audio-player #play-btn.pause {
-  background-image: url('http://imgur.com/MbJn41l.png');
-}
+
