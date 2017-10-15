@@ -44,6 +44,7 @@ function fancy_audio_player_output($nid) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.7.28/aws-sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 
 </head>
