@@ -46,7 +46,7 @@ height: 100% !important;
   -webkit-appearance: none;
   appearance: none;
   background-color: white;
-  color: blue;
+  color: #222;
   height: 14px;
 }
 .audio-player .player-controls progress[value]::-webkit-progress-bar {
@@ -56,7 +56,7 @@ height: 100% !important;
   color: #222;
 }
 .audio-player .player-controls progress::-webkit-progress-value {
-  background-color: blue;
+  background-color: #www;
 }
 .audio-player .player-controls p {
   font-size: 1.6rem;
