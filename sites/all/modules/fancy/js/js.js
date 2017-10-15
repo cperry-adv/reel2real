@@ -1,77 +1,94 @@
 jQuery(document).ready(function() {
 
-	container = $('.container');
-	cover = $('.cover');
-	play = $('#play');
-	pause = $('#pause');
-	mute = $('#mute');
-	muted = $('#muted');
-	close = $('#close');
-	song = new Audio('http://reel-2-real.com/sites/default/files/audio_files/chris_perry_-_marabunta_-_master_08.20.17.wav');
-	duration = song.duration;
+	function initProgressBar() {
+  var player = document.getElementById('player');
+  var length = player.duration
+  var current_time = player.currentTime;
 
+  // calculate total length of value
+  var totalLength = calculateTotalValue(length)
+  document.getElementById("end-time").innerHTML = totalLength;
 
+  // calculate current value time
+  var currentTime = calculateCurrentValue(current_time);
+  document.getElementById("start-time").innerHTML = currentTime;
 
+  var progressbar = document.getElementById('seek-obj');
+  progressbar.value = (player.currentTime / player.duration);
+  progressbar.addEventListener("click", seek);
 
+  if (player.currentTime == player.duration) {
+    document.getElementById('play-btn').className = "";
+  }
 
-	play.on('click', function(e) {
-		e.preventDefault();
-		song.play();
+  function seek(event) {
+    var percent = event.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    progressbar.value = percent / 100;
+  }
+};
 
-		$(this).replaceWith('<a class="button gradient" id="pause" href="" title=""></a>');
-		container.addClass('containerLarge');
-		cover.addClass('coverLarge');
-		$('#close').fadeIn(300);
-		$('#seek').attr('max',song.duration);
-	});
+function initPlayers(num) {
+  // pass num in if there are multiple audio players e.g 'player' + i
 
-	pause.on('click', function(e) {
-		e.preventDefault();
-		song.pause();
-		$(this).replaceWith('<a class="button gradient" id="play" href="" title=""></a>');
+  for (var i = 0; i < num; i++) {
+    (function() {
 
-	});
+      // Variables
+      // ----------------------------------------------------------
+      // audio embed object
+      var playerContainer = document.getElementById('player-container'),
+        player = document.getElementById('player'),
+        isPlaying = false,
+        playBtn = document.getElementById('play-btn');
 
-	mute.on('click', function(e) {
-		e.preventDefault();
-		song.volume = 0;
-		$(this).replaceWith('<a class="button gradient" id="muted" href="" title=""></a>');
+      // Controls Listeners
+      // ----------------------------------------------------------
+      if (playBtn != null) {
+        playBtn.addEventListener('click', function() {
+          togglePlay()
+        });
+      }
 
-	});
+      // Controls & Sounds Methods
+      // ----------------------------------------------------------
+      function togglePlay() {
+        if (player.paused === false) {
+          player.pause();
+          isPlaying = false;
+          document.getElementById('play-btn').className = "";
 
-	muted.on('click', function(e) {
-		e.preventDefault();
-		song.volume = 1;
-		$(this).replaceWith('<a class="button gradient" id="mute" href="" title=""></a>');
+        } else {
+          player.play();
+          document.getElementById('play-btn').className = "pause";
+          isPlaying = true;
+        }
+      }
+    }());
+  }
+}
 
-	});
+function calculateTotalValue(length) {
+  var minutes = Math.floor(length / 60),
+    seconds_int = length - minutes * 60,
+    seconds_str = seconds_int.toString(),
+    seconds = seconds_str.substr(0, 2),
+    time = minutes + ':' + seconds
 
-	$('#close').click(function(e) {
-		e.preventDefault();
-		container.removeClass('containerLarge');
-		cover.removeClass('coverLarge');
-		song.pause();
-		song.currentTime = 0;
-		$('#pause').replaceWith('<a class="button gradient" id="play" href="" title=""></a>');
-		$('#close').fadeOut(300);
-	});
+  return time;
+}
 
+function calculateCurrentValue(currentTime) {
+  var current_hour = parseInt(currentTime / 3600) % 24,
+    current_minute = parseInt(currentTime / 60) % 60,
+    current_seconds_long = currentTime % 60,
+    current_seconds = current_seconds_long.toFixed(),
+    current_time = (current_minute < 10 ? "0" + current_minute : current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
 
+  return current_time;
+}
 
-	$("#seek").bind("change", function() {
-		song.currentTime = $(this).val();
-		$("#seek").attr("max", song.duration);
-	});
-
-	song.addEventListener('timeupdate',function (){
-		curtime = parseInt(song.currentTime, 10);
-	$("#seek").attr("value", curtime);
-	});
-
-
-
-
-
+initPlayers(jQuery('#player-container').length);
 
 
 

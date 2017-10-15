@@ -36,41 +36,35 @@ function fancy_audio_player_output($nid) {
   $audio_uri = file_create_url($node->field_audio_file['und'][0]['uri']);
   $markup = '<!DOCTYPE html>
 <head>
-<title>HTML5 Audio Tutorial</title>
+<title>Marabunta</title>
 
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
-<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="http://reel-2-real.com/sites/all/modules/fancy/css/style.css">
 <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://reel-2-real.com/sites/all/modules/fancy/js/js.js"></script>
-<script type="text/javascript" src="http://reel-2-real.com/sites/all/modules/fancy/js/html5slider.js"></script>
-
-
 
 </head>
 
 <body>
 
-  <h1>HTML 5 Audio Player</h1>
+  <div class="audio-player">
+  <div id="play-btn"></div>
+  <div class="audio-wrapper" id="player-container" href="javascript:;">
+    <audio id="player" ontimeupdate="initProgressBar()">
+      <source src="' . $audio_uri . '" type="audio/wav">
+    </audio>
+  </div>
+  <div class="player-controls scrubber">
+    <p>Oslo <small>by</small> Holy Esque</p>
+    <span id="seek-obj-container">
+      <progress id="seek-obj" value="0" max="1"></progress>
+    </span>
+    <small style="float: left; position: relative; left: 15px;" id="start-time"></small>
+    <small style="float: right; position: relative; right: 20px;" id="end-time"></small>
+  </div>
+  <div class="album-image" style="background-image: url(https://artistxite.ie/imgcache/album/005/161/005161476_500.jpg)"></div>
+</div>
 
-  <div class="container gradient">
-    
-    <img class="cover" src="http://reel-2-real.com/sites/all/modules/fancy/images/cover.jpg" alt="">
-
-    <div class="player gradient">
-
-      <a class="button gradient" id="play" href="" title=""></a>
-      <a class="button gradient" id="mute" href="" title=""></a>
-
-    
-        <input type="range" id="seek" value="0" max=""/>
-  
-
-      <a class="button gradient" id="close" href="" title=""></a>
-      
-    </div><!-- / player -->
-    
-  </div><!-- / Container-->
 </body>
 </html>';
 
