@@ -10,7 +10,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
 height: 100% !important;
 }
 
-.seekObjContainer, .smalltext {
+#seekObjContainer, .smalltext {
   position: relative;
   left: 4%;
 }
