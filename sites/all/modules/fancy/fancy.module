@@ -67,7 +67,127 @@ function fancy_audio_player_output($nid) {
   </div>
   <div class="album-image" style="background-image: url(https://artistxite.ie/imgcache/album/005/161/005161476_500.jpg)"></div>
 </div>
-<script type="text/javascript" src="http://reel-2-real.com/sites/all/modules/fancy/js/js.js"></script>
+<script>
+
+$(function(){
+  showCode();
+})
+
+function showCode() {
+  $(".see-code").on("click", function(){
+    $("html,body").animate({
+          scrollTop: $(window).scrollTop() + 500
+      })
+    $(".code").toggle();
+  });
+}
+
+function initProgressBar() {
+    var player = document.getElementById("player");
+    var length = player.duration
+    var current_time = player.currentTime;
+
+    // calculate total length of value
+    var totalLength = calculateTotalValue(length)
+    document.getElementById("end-time").innerHTML = totalLength;
+
+    // calculate current value time
+    var currentTime = calculateCurrentValue(current_time);
+    document.getElementById("start-time").innerHTML = currentTime;
+
+    var progressbar = document.getElementById("seekObj");
+    progressbar.value = (player.currentTime / player.duration);
+    progressbar.addEventListener("click", seek);
+
+
+    if (player.currentTime == player.duration) {
+      $("#play-btn").removeClass("pause");
+    }
+
+    function seek(evt) {
+      var percent = evt.offsetX / this.offsetWidth;
+      player.currentTime = percent * player.duration;
+      progressbar.value = percent / 100;
+    }
+};
+
+function initPlayers(num) {
+
+  for(var i = 0; i < num; i++) {
+    (function() {
+
+      // Variables
+      // ----------------------------------------------------------
+      // audio embed object
+      var playerContainer = document.getElementById("player-container"),
+        player = document.getElementById("player"),
+        isPlaying = false,
+        playBtn = document.getElementById("play-btn");
+        
+      // Controls Listeners
+      // ----------------------------------------------------------
+      if(playBtn != null) {
+        playBtn.addEventListener("click", function() { togglePlay() });
+      }
+
+      // Controls & Sounds Methods
+      // ----------------------------------------------------------
+      function togglePlay() {
+        if (player.paused === false) {
+          player.pause();
+          // playObj.textContent = "Play";
+          isPlaying = false;
+          $("#play-btn").removeClass("pause");
+
+        } else {
+          player.play();
+          $("#play-btn").addClass("pause");
+          
+          // playObj.textContent = "Pause";
+          isPlaying = true;
+
+          // // pause other players
+          // for(var j = 0; j < num; j++) {
+          //  allPlayers = document.getElementById('player' + j);
+          //  allPlayBtns = document.getElementById('playObj' + j);
+
+          //  if(allPlayers != player) {
+          //    allPlayers.pause();
+          //  }
+
+          //  if(allPlayBtns != playBtn) {
+          //    if(jQuery(allPlayBtns).hasClass('playing')) {
+          //      jQuery(allPlayBtns).removeClass('playing')
+          //    }
+          //  }
+          // }
+        }
+      }
+    }());
+  }
+}
+
+function calculateTotalValue(length) {
+  var minutes = Math.floor(length / 60),
+      seconds_int = length - minutes * 60,
+      seconds_str = seconds_int.toString(),
+      seconds = seconds_str.substr(0,2);
+
+    return minutes + ":" + seconds;
+}
+
+function calculateCurrentValue(currentTime) {
+  var current_hour = parseInt(currentTime / 3600) % 24,
+      current_minute = parseInt(currentTime / 60) % 60,
+      current_seconds_long = currentTime % 60,
+      current_seconds = current_seconds_long.toFixed(),
+      current_time = (current_minute < 10 ? "0" + current_minute : current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
+
+    return current_time;
+}
+
+initPlayers(jQuery("#player-container").length);
+</script>
 </body>
 </html>';
 
