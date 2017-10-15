@@ -47,7 +47,7 @@ function fancy_audio_player_output($nid) {
 
 
   ';
-  $js = '<script src="http://reel-2-real.com/sites/all/libraries/modernizr/modernizr.js"></script>
+  $js = '<script type="text/javascript" src="http://reel-2-real.com/misc/jquery.js?v=1.4.4"></script><script src="http://reel-2-real.com/sites/all/libraries/modernizr/modernizr.js"></script>
 
 <script type="text/javascript">
 window.addEventListener("load", eventWindowLoaded, false);
