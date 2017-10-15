@@ -46,7 +46,7 @@ function initProgressBar() {
     player.currentTime = percent * player.duration;
     progressbar.value = percent / 100;
   }
-};
+}
 
 function initPlayers(num) {
   // pass num in if there are multiple audio players e.g 'player' + i
