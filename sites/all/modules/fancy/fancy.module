@@ -35,7 +35,7 @@ function fancy_audio_player_output($nid) {
   $node = node_load($nid);
   $audio_uri = file_create_url($node->field_audio_file['und'][0]['uri']);
   $canvas_markup = '<canvas id="audioPlayer"></canvas>';
-  $audio_markup = '<audio id="audioPlayer" controls><source src="' . $audio_uri  . '" type="audio/wav"></audio>';
+  $audio_markup = '<audio id="theAudio" controls><source src="' . $audio_uri  . '" type="audio/wav"></audio>';
   $js = '<script type="text/javascript">
 (function() {
     var canvas = document.getElementById("audioPlayer"),
@@ -58,6 +58,32 @@ function fancy_audio_player_output($nid) {
 
     function drawStuff() {
             // do your drawing stuff here
+      window.addEventListener('load', eventWindowLoaded, false);
+function eventWindowLoaded() {
+   var audioElement = document.getElementById("theAudio");
+   audioElement.addEventListener("canplaythrough",audioLoaded,false);
+   audioElement.addEventListener("progress",updateLoadingStatus,false);
+   audioElement.load();
+
+   context.fillStyle = "#000000";
+context.fillText  ("Duration:" + audioElement.duration,  20 ,20);
+context.fillText  ("Current time:" + audioElement.currentTime,  20 ,40);
+context.fillText  ("Loop: " + audioElement.loop,  20 ,60);
+context.fillText  ("Autoplay: " +audioElement.autoplay,  20 ,80);
+context.fillText  ("Muted: " + audioElement.muted,  20 ,100);
+context.fillText  ("Controls: " + audioElement.controls,  20 ,120);
+context.fillText  ("Volume: " + audioElement.volume,  20 ,140);
+context.fillText  ("Paused: " + audioElement.paused,  20 ,160);
+context.fillText  ("Ended: " + audioElement.ended,  20 ,180);
+context.fillText  ("Source: " + audioElement.currentSrc,  20 ,200);
+context.fillText  ("Can Play OGG: " + audioElement.canPlayType("audio/ogg"),
+                  20 ,220);
+context.fillText  ("Can Play WAV: " + audioElement.canPlayType("audio/wav"),
+                  20 ,240);
+context.fillText  ("Can Play MP3: " + audioElement.canPlayType("audio/mp3"),
+                  20 ,260);
+
+}
     }
 })();
 </script>';
@@ -69,7 +95,7 @@ html, body { width:100%; height:100%; } /* just to be sure these are full screen
 canvas { display:block;background:blue; } /* To remove the scrollbars */
 </style>';
 
-  print $css . $audio_markup . $js;
+  print $css . $canvas_markup . $audio_markup . $js;
 die;
 }
 
