@@ -1,4 +1,3 @@
-jQuery(document).ready(function() {
 
 	function calculateTotalValue(length) {
   var minutes = Math.floor(length / 60),
@@ -95,4 +94,4 @@ initPlayers(jQuery('#player-container').length);
 
 	
 	
-});
+
