@@ -60,7 +60,7 @@ window.addEventListener("load", eventWindowLoaded, false);
 function eventWindowLoaded() {
    var audioElement = document.getElementById("theAudio");
    audioElement.addEventListener("canplaythrough",audioLoaded,false);
-   audioElement.addEventListener("progress",updateLoadingStatus,false);
+   
    audioElement.load();
 
 }
@@ -69,15 +69,7 @@ function canvasSupport () {
      return Modernizr.canvas;
 }
 
-function updateLoadingStatus() {
-   var loadingStatus = document.getElementById("loadingStatus");
-   var audioElement = document.getElementById("theAudio");
-   var percentLoaded = parseInt(((audioElement.buffered.end(0) /
-      audioElement.duration) * 100));
-    document.getElementById("loadingStatus").innerHTML =   "loaded "
-      + percentLoaded + "%";
 
-}
 
 function audioLoaded() {
 
