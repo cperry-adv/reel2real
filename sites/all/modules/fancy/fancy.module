@@ -37,21 +37,15 @@ function fancy_audio_player_output($nid) {
   $canvas_markup = '<canvas id="audioPlayer"></canvas>';
   $audio_markup = '
 
-<div style="position: absolute; top: 50px; left: 50px;">
 
-<canvas id="canvasOne" width="500" height="300">
+
+<canvas id="canvasOne" width="500" height="300"
+    style="position: absolute; top: 50px; left: 50px;"  >
  Your browser does not support HTML5 Canvas.
 </canvas>
-</div>
 
-<div id="loadingStatus">
-0%
-</div>
 
-<div style="position: absolute; top: 50px; left: 600px; ">
-<audio id="theAudio" controls><source src="' . $audio_uri  . '" type="audio/wav"></audio>
 
-</div>
   ';
   $js = '<script src="http://reel-2-real.com/sites/all/libraries/modernizr/modernizr.js"></script>
 
@@ -74,7 +68,7 @@ function eventWindowLoaded() {
       return;
    }
    audioElement.addEventListener("canplaythrough",itemLoaded,false);
-   audioElement.setAttribute("src", "song1." + audioType);
+   audioElement.setAttribute("src", "' . $audio_uri . '");
 
    buttonSheet = new Image();
    buttonSheet.onload = itemLoaded;
