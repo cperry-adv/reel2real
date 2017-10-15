@@ -76,11 +76,11 @@ function initPlayers(num) {
         if (player.paused === false) {
           player.pause();
           isPlaying = false;
-          $('#play-btn').removeClass('fa-play-circle');
+          $('#play-btn').removeClass('fa-pause');
 
         } else {
           player.play();
-          $('#play-btn').addClass('fa-pause');
+          $('#play-btn').addClass('fa-play-circle');
           isPlaying = true;
         }
       }
