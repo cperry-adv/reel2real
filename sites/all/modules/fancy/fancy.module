@@ -55,7 +55,7 @@ function fancy_audio_player_output($nid) {
   <div class="audio-player">
           <div id="play-btn" class=""></div>
           <div class="audio-wrapper" id="player-container" href="javascript:;">
-            <div class="cover-image" style="background-image: url("http://google.com");"></div>
+            <div class="cover-image" style="background-image: url(' . $cover_image . ');"></div>
             <audio id="player" ontimeupdate="initProgressBar()">
               <source src="' . $audio_uri . '" type="audio/wav">
             </audio>
