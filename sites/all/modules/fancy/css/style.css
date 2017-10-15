@@ -15,6 +15,10 @@ height: 100% !important;
   left: 6%;
 }
 
+.tracktitle {
+  margin-bottom: 25px;
+}
+
 .audio-player {
   text-align: center;
   display: flex;
