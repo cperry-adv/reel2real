@@ -70,7 +70,7 @@ function fancy_audio_player_output($nid) {
             <span id="seekObjContainer">
               <progress id="seekObj" value="0.246498" max="1"></progress>
             </span>
-            <i class="fa fa-play-circle" ></div>
+            <i class="fa fa-play-circle" id="play-btn"></i>
             
 
             </div>
