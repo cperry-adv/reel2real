@@ -112,7 +112,7 @@ function initProgressBar() {
 
 
     if (player.currentTime == player.duration) {
-      $("#play-btn").removeClass("pause");
+      $("#play-btn").removeClass("fa-pause");
     }
 
     function seek(evt) {
@@ -148,11 +148,11 @@ function initPlayers(num) {
           player.pause();
           // playObj.textContent = "Play";
           isPlaying = false;
-          $("#play-btn").removeClass("pause");
+          $("#play-btn").removeClass("fa-play-circle");
 
         } else {
           player.play();
-          $("#play-btn").addClass("pause");
+          $("#play-btn").addClass("fa-pause");
           
           // playObj.textContent = "Pause";
           isPlaying = true;
