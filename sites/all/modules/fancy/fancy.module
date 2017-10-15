@@ -55,7 +55,7 @@ function fancy_audio_player_output($nid) {
 
   <div class="container gradient">
     
-    <img class="cover" src="images/cover.jpg" alt="">
+    <img class="cover" src="http://reel-2-real.com/sites/all/modules/fancy/images/cover.jpg" alt="">
 
     <div class="player gradient">
 
