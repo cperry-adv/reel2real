@@ -47,13 +47,13 @@ height: 100% !important;
   appearance: none;
   background-color: white;
   color: blue;
-  height: 5px;
+  height: 14px;
 }
 .audio-player .player-controls progress[value]::-webkit-progress-bar {
   background-color: white;
   border-radius: 2px;
   border: 1px solid #dfdfdf;
-  color: blue;
+  color: #222;
 }
 .audio-player .player-controls progress::-webkit-progress-value {
   background-color: blue;
