@@ -56,7 +56,7 @@ function fancy_audio_player_output($nid) {
   $js = '<script src="http://reel-2-real.com/sites/all/libraries/modernizr/modernizr.js"></script>
 
 <script type="text/javascript">
-window.addEventListener('load', eventWindowLoaded, false);
+window.addEventListener("load", eventWindowLoaded, false);
 function eventWindowLoaded() {
    var audioElement = document.getElementById("theAudio");
    audioElement.addEventListener("canplaythrough",audioLoaded,false);
@@ -74,8 +74,8 @@ function updateLoadingStatus() {
    var audioElement = document.getElementById("theAudio");
    var percentLoaded = parseInt(((audioElement.buffered.end(0) /
       audioElement.duration) * 100));
-    document.getElementById("loadingStatus").innerHTML =   'loaded '
-      + percentLoaded + '%';
+    document.getElementById("loadingStatus").innerHTML =   "loaded "
+      + percentLoaded + "%";
 
 }
 
