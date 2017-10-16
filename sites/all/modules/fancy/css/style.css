@@ -43,6 +43,10 @@ html {
   background-position: center;
 }
 
+.buttons-container {
+  display: flex;
+} 
+
 .audio-player {
   text-align: center;
   display: flex;
@@ -87,7 +91,9 @@ html {
 .audio-player .player-controls p {
   font-size: 1.2rem;
 }
-.audio-player #play-btn {
+.audio-player #play-btn,
+.audio-player #stepback-btn,
+.audio-player #stepforward-btn {
   color: #fff;
   cursor: pointer;
   font-size: 5rem;
