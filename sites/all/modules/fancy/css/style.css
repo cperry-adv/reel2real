@@ -24,7 +24,7 @@ html {
 
 .tracktitle {
   margin-bottom: 5%;
-  font-size: 6rem;
+  font-size: 2rem !important;
 }
 
 .cover-image {
@@ -80,7 +80,7 @@ html {
   background-color: #fff;
 }
 .audio-player .player-controls p {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
 }
 .audio-player #play-btn {
   color: #fff;
