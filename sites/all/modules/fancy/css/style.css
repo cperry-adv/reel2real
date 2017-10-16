@@ -20,11 +20,6 @@ html {
   height: 100% !important;
 }
 
-#seekObjContainer, .smalltext, #play-btn, .tracktitle {
-  position: relative;
-  left: 6.5%;
-}
-
 .tracktitle {
   margin-bottom: 5%;
   font-size: 6rem;
