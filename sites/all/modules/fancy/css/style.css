@@ -99,5 +99,6 @@ html {
   font-size: 5rem;
   position: relative;
   top: 60px;
+  flex-grow: 1;
 }
 
