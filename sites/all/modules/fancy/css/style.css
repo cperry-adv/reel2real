@@ -24,15 +24,15 @@ html {
 }
 
 .tracktitle {
-  margin-bottom: 25px;
-  font-size: 4rem;
+  margin-bottom: 5%;
+  font-size: 6rem;
 }
 
 .audio-player {
   text-align: center;
   display: flex;
   flex-flow: row;
-  margin: 4rem auto;
+  margin: 0 auto;
   width: 85%;
   color: #fff;
   font-family: 'Montserrat';

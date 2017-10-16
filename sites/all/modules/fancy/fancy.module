@@ -76,7 +76,7 @@ function fancy_audio_player_output($nid) {
             
 
             </div>
-            <div class="album-image" style="background-image: url(https://artistxite.ie/imgcache/album/005/161/005161476_500.jpg)"></div>
+            
         </div>
 
 <script>
