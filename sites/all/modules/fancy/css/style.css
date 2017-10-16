@@ -1,4 +1,13 @@
 @charset "utf-8"; /* CSS Document */
+html {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body {
+  flex-grow: 1;
+}
+
 body,
 html {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
