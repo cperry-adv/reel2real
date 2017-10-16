@@ -85,8 +85,8 @@ html {
 .audio-player #play-btn {
   color: #fff;
   cursor: pointer;
-  margin: 3% auto 0 auto;
   font-size: 5rem;
-  margin-top: 15px;
+  position: relative;
+  top: 60px;
 }
 
