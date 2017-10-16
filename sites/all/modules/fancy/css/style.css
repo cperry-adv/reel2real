@@ -73,7 +73,7 @@ html {
   background-color: white;
   color: #fff;
   height: 14px;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 .audio-player .player-controls progress[value]::-webkit-progress-bar {
   background-color: #333;
