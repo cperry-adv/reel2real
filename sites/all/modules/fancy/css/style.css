@@ -61,7 +61,7 @@ html {
   color: #222;
 }
 .audio-player .player-controls progress::-webkit-progress-value {
-  background-color: #www;
+  background-color: #fff;
 }
 .audio-player .player-controls p {
   font-size: 1.6rem;
