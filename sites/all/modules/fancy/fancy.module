@@ -58,7 +58,7 @@ function fancy_audio_player_output($nid) {
           
           <div class="audio-wrapper" id="player-container" href="javascript:;">
             
-            <audio id="player" ontimeupdate="initProgressBar()" x-webkit-airplay="allow">
+            <audio id="player" ontimeupdate="initProgressBar()" preload="auto" x-webkit-airplay="allow">
               <source src="' . $audio_uri . '" type="audio/wav">
             </audio>
           </div>
