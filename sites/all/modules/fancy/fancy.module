@@ -24,7 +24,7 @@ function fancy_menu() {
 
 function fancy_menu_alter(&$items) {
   $items['node/%node']['access callback'] = TRUE;
-  $node = menu_get_object();
+  $node = menu_get_object(); dpm($node);
   if ($node->type != 'track') {
     $items['node/%node']['page callback'] = 'node_page_view';
   }
