@@ -82,6 +82,7 @@ html {
 }
 .audio-player .player-controls progress::-webkit-progress-value {
   background-color: #fff;
+  border-radius: 7px;
 }
 .audio-player .player-controls p {
   font-size: 1.2rem;
