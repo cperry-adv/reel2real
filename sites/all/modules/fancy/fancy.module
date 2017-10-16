@@ -23,9 +23,9 @@ function fancy_menu() {
 }
 
 function fancy_menu_alter(&$items) {
-  $items['node/15']['access callback'] = TRUE;
-  $items['node/15']['page callback'] = 'fancy_audio_player_output';
-  $items['node/15']['page arguments'] = array(1);
+  $items['track/marabunta']['access callback'] = TRUE;
+  $items['track/marabunta']['page callback'] = 'fancy_audio_player_output';
+  $items['track/marabunta']['page arguments'] = array(1);
 }
 
 /**
