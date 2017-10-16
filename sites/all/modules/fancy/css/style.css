@@ -34,6 +34,11 @@ html {
   width: 85%;
 }
 
+.cover-image-src {
+  display: flex;
+  flex-grow: 1;
+}
+
 .audio-player {
   text-align: center;
   display: flex;
