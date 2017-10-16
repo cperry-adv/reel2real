@@ -60,12 +60,6 @@ function fancy_audio_player_output($nid) {
             
             <audio id="player" ontimeupdate="initProgressBar()" x-webkit-airplay="allow">
               <source src="' . $audio_uri . '" type="audio/wav">
-              <embed airplay=”allow”
-       src="' . $audio_uri . '"
-       width=400
-       height=300
-       mime-type="audio/wav">
-  </embed>
             </audio>
           </div>
           <div class="player-controls scrubber">
