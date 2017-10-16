@@ -48,7 +48,7 @@ html {
   width: 85%;
   color: #fff;
   font-family: 'Montserrat';
-  flex-grow: 1;
+  flex-grow: .5;
 }
 .audio-player .album-image {
   min-height: 100px;
