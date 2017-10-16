@@ -44,7 +44,7 @@ function fancy_audio_player_output($node) {
   $markup = '<!DOCTYPE html>
   <html>
 <head>
-<title>Marabunta</title>
+<title>' . $node->title . '</title>
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="http://reel-2-real.com/sites/all/modules/fancy/css/style.css">
 <link rel="stylesheet" type="text/css" href="http://reel-2-real.com/sites/all/modules/fancy/css/font-awesome.css">
