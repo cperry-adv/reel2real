@@ -26,6 +26,13 @@ html {
   font-size: 6rem;
 }
 
+.cover-image {
+  flex-grow: 13; 
+  margin: 0 auto; 
+  display: flex; 
+  width: 85%;
+}
+
 .audio-player {
   text-align: center;
   display: flex;
