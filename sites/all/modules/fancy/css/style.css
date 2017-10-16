@@ -52,13 +52,12 @@ html {
   -webkit-appearance: none;
   appearance: none;
   background-color: white;
-  color: #222;
+  color: #fff;
   height: 14px;
 }
 .audio-player .player-controls progress[value]::-webkit-progress-bar {
-  background-color: white;
+  background-color: #333;
   border-radius: 2px;
-  border: 1px solid #dfdfdf;
   color: #222;
 }
 .audio-player .player-controls progress::-webkit-progress-value {
