@@ -26,3 +26,7 @@ body {
 	background: linear-gradient(45deg, #2981ce 0%,#70d170 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2981ce', endColorstr='#70d170',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+body.front .page-header {
+	display: none;
+}
