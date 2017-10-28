@@ -31,7 +31,7 @@ body.front .page-header {
 	display: none;
 }
 
-.navbar-nav.fixed{
+#navbar.fixed{
   position:fixed;
   z-index: 9999;
   top:0;
