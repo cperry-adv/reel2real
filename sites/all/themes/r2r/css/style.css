@@ -30,3 +30,9 @@ body {
 body.front .page-header {
 	display: none;
 }
+
+.navbar-nav.fixed{
+  position:fixed;
+  z-index: 9999;
+  top:0;
+}
