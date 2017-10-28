@@ -91,6 +91,18 @@ function initPlayers(num) {
 initPlayers(jQuery('#player-container').length);
 
 
+/* fook ya */
+
+
+  var menuOffset = jQuery('.navbar-nav')[0].offsetTop;
+  jQuery(document).bind('ready scroll',function() {
+    var docScroll = jQuery(document).scrollTop();
+    if(docScroll &gt;= menuOffset) {
+      jQuery('.navbar-nav').addClass('fixed');
+    } else {
+      jQuery('.navbar-nav').removeClass('fixed').removeAttr(&quot;width&quot;);
+    }
+   });
 
 
 	

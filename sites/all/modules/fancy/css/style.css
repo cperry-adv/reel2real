@@ -102,13 +102,5 @@ html {
   flex-grow: 1;
 }
 
-/* nav */
 
-.navbar-nav {
-  float: none;
-}
-
-.navbar-nav li.last {
-  float: right;
-}
 
