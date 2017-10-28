@@ -11,8 +11,8 @@
   float: right;
 }
 
-body {
-	
+html {
+
 	background: #2981ce; /* Old browsers */
 	background: -moz-linear-gradient(45deg, #2981ce 0%, #70d170 99%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(45deg, #2981ce 0%,#70d170 99%); /* Chrome10-25,Safari5.1-6 */
